@@ -1,33 +1,17 @@
 package com.voxai.studio.model
 
 enum class VoiceCategory(val label: String) {
-  ALL("All"),
-  NARRATIVE("Narrative"),
-  REELS("Reels & Shorts"),
-  PODCAST("Podcast"),
-  SPIRITUAL("Calm & Osho"),
+  ALL("All"), NARRATIVE("Narrative"), REELS("Reels & Shorts"), PODCAST("Podcast"), SPIRITUAL("Calm & Osho"),
 }
 
 data class VoicePreset(
-  val id: String,
-  val elevenLabsVoiceId: String,
-  val name: String,
-  val tagline: String,
-  val language: String,
-  val category: VoiceCategory,
-  val pitch: Float,
-  val rate: Float,
-  val accentHex: Long,
+  val id: String, val elevenLabsVoiceId: String, val name: String, val tagline: String,
+  val language: String, val category: VoiceCategory, val pitch: Float, val rate: Float, val accentHex: Long,
 )
 
 data class GeneratedAudioItem(
-  val id: String,
-  val title: String,
-  val voiceName: String,
-  val filePath: String,
-  val sourceMode: String,
-  val durationSec: Int,
-  val waveform: List<Float>,
+  val id: String, val title: String, val voiceName: String, val filePath: String,
+  val sourceMode: String, val durationSec: Int, val waveform: List<Float>,
 )
 
 data class VoxUiState(
@@ -47,11 +31,8 @@ data class VoxUiState(
   val currentAudio: GeneratedAudioItem? = null,
   val statusMessage: String? = null,
 ) {
-  val selectedVoice: VoicePreset
-    get() = voices.firstOrNull { it.id == selectedVoiceId } ?: voices.first()
-
-  val filteredVoices: List<VoicePreset>
-    get() = if (selectedCategory == VoiceCategory.ALL) voices else voices.filter { it.category == selectedCategory }
+  val selectedVoice: VoicePreset get() = voices.firstOrNull { it.id == selectedVoiceId } ?: voices.first()
+  val filteredVoices: List<VoicePreset> get() = if (selectedCategory == VoiceCategory.ALL) voices else voices.filter { it.category == selectedCategory }
 }
 
 fun defaultVoicePresets(): List<VoicePreset> = listOf(
